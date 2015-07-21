@@ -1,10 +1,19 @@
 Package: khanELO
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Utlizes MAP data and Khan Academy data to update items and students using ELO
+Rating System
 Version: 0.1
 Date: 2015-07-21
-Author: Who wrote it
+Author: c(person('James', 'Kim', email = 'jamesykim10@gmail.com',
+    role = c('aut', 'cre')), person('Andrew', 'Martin',
+    email = 'almartin@gmail.com, role = 'aut'))
 Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
+Description: Uses MAP data provided by the NWEA and Khan Academy data from its
+    API. Package contains functions to clean and merge this data so it can be
+    used to update item difficulties and estimate student proficiencies using
+    the ELO Rating System.
 License: What license is it under?
 LazyData: TRUE
+Depends:
+    dplyr
+    reshape2

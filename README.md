@@ -1,2 +1,2 @@
 # khanELO
-R package to update Khan item difficulties and to estimate student estimates using the ELO Rating System.
+R package to update Khan item difficulties and to estimate student RIT scores using the ELO Rating System.
