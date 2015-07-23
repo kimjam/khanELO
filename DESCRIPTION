@@ -1,7 +1,7 @@
 Package: khanELO
 Type: Package
-Title: Utlizes MAP data and Khan Academy data to update items and students using ELO
-Rating System
+Title: Utlizes MAP data and Khan Academy data to update items and students using
+    ELO Rating System
 Version: 0.1
 Date: 2015-07-21
 Author: c(person('James', 'Kim', email = 'jamesykim10@gmail.com',
