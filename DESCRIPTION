@@ -16,5 +16,6 @@ License: What license is it under?
 LazyData: TRUE
 Depends:
     dplyr
-    reshape2
     ggplot2
+    lubridate
+    reshape2
