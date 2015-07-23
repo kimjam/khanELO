@@ -15,7 +15,7 @@ Description: Uses MAP data provided by the NWEA and Khan Academy data from its
 License: What license is it under?
 LazyData: TRUE
 Depends:
-    dplyr
-    ggplot2
-    lubridate
+    dplyr,
+    ggplot2,
+    lubridate,
     reshape2
