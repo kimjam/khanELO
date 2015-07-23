@@ -322,7 +322,7 @@ populate_map <- function(
 #'
 #' @param student_df A dataframe containing a student's map and khan activity
 #'
-#' @returns returns dataframe with subset column
+#' @return returns dataframe with subset column
 #' @export
 
 add_subset <- function(

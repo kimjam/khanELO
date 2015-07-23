@@ -2,7 +2,7 @@
 #'
 #' @param stu_activity_df a dataframe created by generate_activity()
 #'
-#' @returns prints a plot
+#' @return prints a plot
 #' @export
 
 plot_activity <- function(
