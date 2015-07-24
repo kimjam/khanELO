@@ -133,6 +133,7 @@ generate_activity <- function(
 
     }
 
+    names(activity) <- students
     if (verbose) print('Done.')
 
     return(activity)
