@@ -32,6 +32,14 @@ generate_activity <- function(
     verbose = TRUE
 ) {
 
+    if (colnames[1] != 'studentid' & 'studentid' %in% names(map)) {
+        names(map)[match('studentid', names(map))] <- 'unused_sid'
+        names(map)[match(colnames[-1], names(map))] <- c(
+            'testritscore',
+            'teststartdate'
+        )
+    }
+
     names(map)[match(colnames, names(map))] <- c(
         'studentid',
         'testritscore',
