@@ -344,3 +344,69 @@ add_subset <- function(
 
     return(student_df)
 }
+
+#' Get an item's mastery history
+#'
+#'@param student_activity A list of dataframes created by generate_activty()
+#'@param item_title name of Khan exercise to get history for
+#'
+#'@return returns a dataframe containing mastery history and rit estimate
+#'@export
+
+get_item_history <- function(
+    student_activity,
+    item_title
+) {
+
+    student_map <- lapply(
+        student_activity,
+        function(x) x %>%
+            dplyr::filter(
+                exercise == 'maptest'
+            )
+    )
+
+    count <- 1
+    for (i in 1:length(student_activity)) {
+
+        activity <- student_activity[[i]] %>%
+            dplyr::filter(
+                exercise == item_title
+            ) %>%
+            dplyr::arrange(
+                exercise_status
+            )
+
+        rit_score <- vector(length = length(student_activity))
+        mastered_dummy <- vector(length = length(student_activity))
+        if (nrow(activity) == 0) {
+            next
+        } else {
+            subset <- tail(activity$subset, n = 1)
+            if (subset == 0) {
+                rit_score[count] <- tail(student_map[[i]]$rit, n = 1)
+            } else {
+                rit_score[count] <- student_map[[i]]$rit[subset]
+            }
+            if (tail(activity$exercise_status, n = 1) == 'mastery3') {
+
+                mastered_dummy[count] <- 0
+
+            } else {
+
+                mastered_dummy[count] <- 1
+
+            }
+        }
+        count <- count + 1
+
+    }
+
+    history <- data.frame(
+        rit_score = rit_score[1:(count - 1)],
+        mastered_dummy = mastered_dummy[1:(count - 1)]
+    )
+
+    return(history)
+}
+
