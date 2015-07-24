@@ -151,6 +151,9 @@ generate_activity <- function(
     }
 
     names(activity) <- students
+
+    mask <- sapply(activity, function(x) 'data.frame' %in% class(x))
+    activity <- activity[mask]
     if (verbose) print('Done.')
 
     return(activity)
