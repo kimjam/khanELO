@@ -6,6 +6,8 @@
 #' Looks like dataframe found in data(simulated_khanmath)
 #' @param khan_states Dataframe containing student state change data for Khan
 #' Academy exercises. Looks like dataframe found in data(simulated_khanstate)
+#' @param colnames vector of map colnames that contain studentid, rit score, and
+#' test date. Default is c('studentid', 'testritscore', 'teststartdate')
 #' @param estimate_type String to indicate which type (NWEA, tree, inhouse)
 #' of Khan item estimate to use. Defaults to tree (more coverage than nwea). If
 #' 'inhouse' is chosen, user must provide filepath to csv of inhouse estimates
@@ -23,11 +25,18 @@ generate_activity <- function(
     map,
     khan_exers,
     khan_states,
+    colnames = c('studentid', 'testritscore', 'teststartdate'),
     numeric_sid = TRUE,
     estimate_type = 'tree',
     inhouse_est = NA,
     verbose = TRUE
 ) {
+
+    names(map)[match(colnames, names(map))] <- c(
+        'studentid',
+        'testritscore',
+        'teststartdate'
+    )
 
     if (verbose) print('Cleaning map data...')
     map <- clean_map(mapdata = map, numeric_sid)

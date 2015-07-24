@@ -4,7 +4,8 @@
 \alias{generate_activity}
 \title{Clean and merge MAP, Khan, and item difficulty data.}
 \usage{
-generate_activity(map, khan_exers, khan_states, numeric_sid = TRUE,
+generate_activity(map, khan_exers, khan_states, colnames = c("studentid",
+  "testritscore", "teststartdate"), numeric_sid = TRUE,
   estimate_type = "tree", inhouse_est = NA, verbose = TRUE)
 }
 \arguments{
@@ -16,6 +17,9 @@ Looks like dataframe found in data(simulated_khanmath)}
 
 \item{khan_states}{Dataframe containing student state change data for Khan
 Academy exercises. Looks like dataframe found in data(simulated_khanstate)}
+
+\item{colnames}{vector of map colnames that contain studentid, rit score, and
+test date. Default is c('studentid', 'testritscore', 'teststartdate')}
 
 \item{numeric_sid}{Conditional indicating whether studentid is numeric or
 not. Default is TRUE}

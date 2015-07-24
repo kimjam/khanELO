@@ -9,6 +9,8 @@
 #' ex: '/mypath/my_estimates.csv'
 #' @param numeric_sid Conditional indicating whether studentid is numeric or
 #' not. Default is TRUE
+#' @param plot TRUE if you want to print a plot showing change in difficulty.
+#' Default is FALSE.
 #' @param verbose Default is TRUE to print status updates.
 #'
 #' @return returns dataframe of updated difficulties or writes to a csv if
@@ -22,6 +24,7 @@ update_diffs <- function(
     priorpath = NA,
     filepath = NA,
     numeric_sid = TRUE,
+    plot = FALSE,
     verbose = TRUE
 ) {
 
@@ -56,12 +59,12 @@ update_diffs <- function(
 
         item_history <- get_item_history(student_activity, item_title = item)
 
-        item_diff <- item_diffs$rit_estimate[item_diffs$slug == item]
+        item_diff <- item_diffs$rit_estimate[match(item, items)]
 
         if (verbose) {
-            print(paste('Updating item',
+            print(paste0('Updating item ',
                         match(item, items),
-                        'of',
+                        ' of ',
                         length(items),
                         '...')
             )
@@ -97,8 +100,37 @@ update_diffs <- function(
             item_diff <- item_diff * 10 + 200
             item_diffs$updated_estimate[match(item, item_diffs$slug)] <- item_diff
         }
-
         if(verbose) print('Done.')
+    }
+
+    item_diffs$rit_estimate <- item_diffs$rit_estimate * 10 + 200
+    if (plot) {
+        p <- ggplot(
+            item_diffs,
+            aes(
+                x = updated_estimate,
+                y = rit_estimate
+            )
+        ) +
+            geom_point() +
+            geom_abline(
+                slope = 1,
+                intercept = 0,
+                color = 'red'
+            ) +
+            xlim(
+                min(item_diffs$rit_estimate, na.rm = TRUE) - 10,
+                max(item_diffs$rit_estimate, na.rm = TRUE) + 10
+            ) +
+            ylim(
+                min(item_diffs$updated_estimate, na.rm = TRUE) - 10,
+                max(item_diffs$updated_estimate, na.rm = TRUE) + 10
+            ) +
+            ggtitle('Prior vs. Updated Item Difficulties') +
+            xlab('Updated Estimate') +
+            ylab('Prior Estimate')
+
+        print(p)
     }
 
     updated_diffs <- item_diffs %>%

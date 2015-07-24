@@ -5,7 +5,7 @@
 \title{Uses student activity data to update item difficulties.}
 \usage{
 update_diffs(student_activity, priors = "tree", priorpath = NA,
-  filepath = NA, numeric_sid = TRUE, verbose = TRUE)
+  filepath = NA, numeric_sid = TRUE, plot = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{student_activity}{List of dataframes returned by generate_activity()}
@@ -21,6 +21,9 @@ ex: '/mypath/my_estimates.csv'}
 
 \item{numeric_sid}{Conditional indicating whether studentid is numeric or
 not. Default is TRUE}
+
+\item{plot}{TRUE if you want to print a plot showing change in difficulty.
+Default is FALSE.}
 
 \item{verbose}{Default is TRUE to print status updates.}
 }
