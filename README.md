@@ -5,7 +5,9 @@ This package was create to make my work generalizable and actionable. The packag
 
 ## Workflow
 
-This is the process to create your own item difficulty estimates and student RIT score predictions. The 'tree' estimates will be used as priors, which is recommended for more coverage. First, load in the sample data from the package.* Then, create the list of dataframes that are used to update item difficulties and make RIT score predictions.
+This is the process to create your own item difficulty estimates and student RIT score predictions. The 'tree' estimates will be used as priors, which is recommended for more coverage. 
+
+First, load in the sample data from the package.* Then, create the list of dataframes that are used to update item difficulties and make RIT score predictions.
 
 ```r
 data(sample_map_data)
