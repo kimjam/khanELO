@@ -72,5 +72,5 @@ predicted_rit <- khanELO::update_proficiencies(
 
 In practice, the end_date should not need to be included if the predictions are made close to, but not after the MAP test you are preparing for. The start date should be a date to capture the testing data for the most recent MAP test. It was included in the code above to work with the sample data.
 
-* When using the sample data provided, the activity plots, updated difficulties, and estimated RIT scores should not be used to validate the study. These datasets were simulated for privacy and do not represent actual Khan Academy activity. The sample_map_data dataset is a sample provided by the NWEA.
+*When using the sample data provided, the activity plots, updated difficulties, and estimated RIT scores should not be used to validate the study. These datasets were simulated for privacy and do not represent actual Khan Academy activity. The sample_map_data dataset is a sample provided by the NWEA.
 
