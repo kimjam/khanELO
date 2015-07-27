@@ -6,7 +6,7 @@
 \usage{
 generate_activity(map, khan_exers, khan_states, colnames = c("studentid",
   "testritscore", "teststartdate"), numeric_sid = TRUE,
-  estimate_type = "tree", inhouse_est = NA, verbose = TRUE)
+  estimate_type = "tree", inhouse_path = NA, verbose = TRUE)
 }
 \arguments{
 \item{map}{Dataframe containing student MAP test data provided by NWEA. Looks
@@ -29,6 +29,8 @@ of Khan item estimate to use. Defaults to tree (more coverage than nwea). If
 'inhouse' is chosen, user must provide filepath to csv of inhouse estimates
 containing exercise title and estimated difficulty. Can be created using
 update_diff() function.}
+
+\item{inhouse_path}{filepath indicating where inhouse estimates are kept}
 
 \item{verbose}{Default is TRUE to print status updates.}
 }

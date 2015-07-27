@@ -15,6 +15,7 @@
 #' update_diff() function.
 #' @param numeric_sid Conditional indicating whether studentid is numeric or
 #' not. Default is TRUE
+#' @param inhouse_path filepath indicating where inhouse estimates are kept
 #' @param verbose Default is TRUE to print status updates.
 #'
 #' @return Returns list of dataframes. Each dataframe will contain a student's
@@ -28,7 +29,7 @@ generate_activity <- function(
     colnames = c('studentid', 'testritscore', 'teststartdate'),
     numeric_sid = TRUE,
     estimate_type = 'tree',
-    inhouse_est = NA,
+    inhouse_path = NA,
     verbose = TRUE
 ) {
 
@@ -83,7 +84,7 @@ generate_activity <- function(
 
     } else if (estimate_type == 'inhouse') {
 
-        if (is.na(inhouse_est)) {
+        if (is.na(inhouse_path)) {
             stop('Must provide csv of in house estimates if
                  estimate_type = inhouse'
             )
