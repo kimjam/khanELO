@@ -1,7 +1,7 @@
 # khanELO
 An R package to update Khan item difficulties and to estimate student RIT scores using the ELO Rating System.
 
-This package was create to make my work generalizable and actionable. The package allows the user to take data from Khan Academy along with MAP data provided by the NWEA to ultimately predict a studet's RIT score.
+This package was create to make my work generalizable and actionable. The package allows the user to take data from Khan Academy along with MAP data provided by the NWEA to ultimately predict a student's RIT score.
 
 ## Workflow
 
@@ -30,7 +30,7 @@ If you want to see a visualization of a student's Khan Academy actvity as well a
 khanELO::plot_activity(activity[['F08000002']])
 ```
 
-Next, update the item difficulties. Save the new estiamtes to a file you can update or so you can load them into a database.
+Next, update the item difficulties. Save the new estimates to a file you can update or so you can load them into a database.
 
 ```r
 khanELO::update_diffs(
@@ -72,7 +72,7 @@ predicted_rit <- khanELO::update_proficiencies(
 )
 ```
 
-In practice, the end_date should not need to be included if the predictions are made close to, but not after the MAP test you are preparing for. The start date should be a date to capture the testing data for the most recent MAP test. It was included in the code above to work with the sample data.
+In practice, the end_date should not need to be included if the predictions are made close to, but not after the MAP test result you are trying to predict. The start date should be a date to capture the testing data for the most recent MAP test. The end_date parameter was included in the code above to work with the sample data.
 
 *When using the sample data provided, the activity plots, updated difficulties, and estimated RIT scores should not be used to validate the study. These datasets were simulated for privacy and do not represent actual Khan Academy activity. The sample_map_data dataset is a sample provided by the NWEA.
 
