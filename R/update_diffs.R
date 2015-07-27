@@ -76,17 +76,16 @@ update_diffs <- function(
         } else {
 
             item_history$rit_score <- (item_history$rit_score - 200) / 10
+            if (nrow(item_history) > 100) {
+                W <- .02
+            } else if (nrow(item_history) > 50) {
+                W <- .04
+            } else {
+                W <- .2
+            }
 
-            count <- 1
             for (i in 1:nrow(item_history)) {
 
-                if (count > 100) {
-                    W <- .02
-                } else if (count > 50) {
-                    W <- .04
-                } else {
-                    W <- .2
-                }
                 item_diff <- item_diff +
                     W *
                     (item_history$mastered_dummy[i] -
@@ -94,7 +93,6 @@ update_diffs <- function(
                               (1 + exp(item_diff - item_history$rit_score[i]))
                          )
                     )
-                count <- count + 1
             }
 
             item_diff <- item_diff * 10 + 200
@@ -119,12 +117,12 @@ update_diffs <- function(
                 color = 'red'
             ) +
             xlim(
-                min(item_diffs$rit_estimate, na.rm = TRUE) - 10,
-                max(item_diffs$rit_estimate, na.rm = TRUE) + 10
+                150,
+                250
             ) +
             ylim(
-                min(item_diffs$updated_estimate, na.rm = TRUE) - 10,
-                max(item_diffs$updated_estimate, na.rm = TRUE) + 10
+                150,
+                250
             ) +
             ggtitle('Prior vs. Updated Item Difficulties') +
             xlab('Updated Estimate') +

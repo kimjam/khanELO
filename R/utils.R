@@ -366,6 +366,8 @@ get_item_history <- function(
             )
     )
 
+    rit_score <- vector(length = length(student_activity))
+    mastered_dummy <- vector(length = length(student_activity))
     count <- 1
     for (i in 1:length(student_activity)) {
 
@@ -377,9 +379,7 @@ get_item_history <- function(
                 exercise_status
             )
 
-        rit_score <- vector(length = length(student_activity))
-        mastered_dummy <- vector(length = length(student_activity))
-        if (nrow(activity) == 0) {
+        if (nrow(activity) == 0 | !('data.frame' %in% class(student_map[[i]]))) {
             next
         } else {
             subset <- tail(activity$subset, n = 1)
@@ -388,6 +388,7 @@ get_item_history <- function(
             } else {
                 rit_score[count] <- student_map[[i]]$rit[subset]
             }
+
             if (tail(activity$exercise_status, n = 1) == 'mastery3') {
 
                 mastered_dummy[count] <- 0
@@ -397,9 +398,8 @@ get_item_history <- function(
                 mastered_dummy[count] <- 1
 
             }
+            count <- count + 1
         }
-        count <- count + 1
-
     }
 
     history <- data.frame(

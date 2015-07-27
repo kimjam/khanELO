@@ -132,9 +132,13 @@ generate_activity <- function(
             dplyr::filter(
                 !is.na(date)
             )
+
+        min_date <- min(stu_states[[i]]$date, na.rm = TRUE)
+        diff <- min_date - stu_map[[i]]$date
+        min_ind <- match(min(diff[diff >= 0], na.rm = TRUE), diff)
         date_range <- c(
-            min(stu_states[[i]]$date) - lubridate::ddays(30),
-            max(stu_states[[i]]$date) + lubridate::ddays(30)
+            stu_map[[i]]$date[min_ind],
+            max(stu_states[[i]]$date, na.rm = TRUE) + lubridate::ddays(60)
         )
 
         stu_map[[i]] <- stu_map[[i]] %>%
@@ -143,10 +147,15 @@ generate_activity <- function(
                 date <= date_range[2]
             )
 
-        activity[[i]] <- rbind(stu_map[[i]], stu_states[[i]])
+        if (nrow(stu_states[[i]]) == 0 | nrow(stu_map[[i]]) == 0) {
+            activity[[i]] <- NA
+        } else {
 
-        activity[[i]] <- activity[[i]][order(activity[[i]]$date), ]
-        activity[[i]] <- add_subset(activity[[i]])
+            activity[[i]] <- rbind(stu_map[[i]], stu_states[[i]])
+
+            activity[[i]] <- activity[[i]][order(activity[[i]]$date), ]
+            activity[[i]] <- add_subset(activity[[i]])
+        }
 
     }
 
