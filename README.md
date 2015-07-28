@@ -1,7 +1,8 @@
 # khanELO
 An R package to update Khan item difficulties and to estimate student RIT scores using the ELO Rating System.
 
-This package was create to make my work generalizable and actionable. The package allows the user to take data from Khan Academy along with MAP data provided by the NWEA to ultimately predict a student's RIT score.
+This package was created to make my work generalizable and actionable. The package allows the user to take data from Khan Academy, along with MAP data provided by the NWEA, to ultimately predict a student's RIT score.
+
 
 ## Workflow
 
@@ -71,8 +72,7 @@ predicted_rit <- khanELO::update_proficiencies(
     end_date = '2014-12-10'
 )
 ```
+The start date should capture the testing data for the most recent MAP test. In practice, the end_date should not need to be included if the predictions are made close to, but not after the MAP test result you are trying to predict. The end_date parameter was included in the code above to work with the sample data.
 
-In practice, the end_date should not need to be included if the predictions are made close to, but not after the MAP test result you are trying to predict. The start date should be a date to capture the testing data for the most recent MAP test. The end_date parameter was included in the code above to work with the sample data.
-
-*When using the sample data provided, the activity plots, updated difficulties, and estimated RIT scores should not be used to validate the study. These datasets were simulated for privacy and do not represent actual Khan Academy activity. The sample_map_data dataset is a sample provided by the NWEA.
+*When using the sample data provided, the activity plots, updated difficulties, and estimated RIT scores should not be used to validate the study. These datasets were simulated for privacy reasons and do not represent actual Khan Academy activity. The datasets should, however, be used as an example of what datasets the package needs to work. The sample_map_data dataset is a sample provided by the NWEA.
 
