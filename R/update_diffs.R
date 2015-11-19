@@ -97,6 +97,9 @@ update_diffs <- function(
 
             item_diff <- item_diff * 10 + 200
             item_diffs$updated_estimate[match(item, item_diffs$slug)] <- item_diff
+            item_diffs$matches[match(item, item_diffs$slug)] <- item_diffs$matches[match(item, item_diffs$slug)] + nrow(item_history)
+            item_diffs$last_updated[match(item, item_diffs$slug)] <- max(item_history$date, na.rm = TRUE)
+
         }
         if(verbose) print('Done.')
     }
@@ -134,7 +137,9 @@ update_diffs <- function(
     updated_diffs <- item_diffs %>%
         dplyr::select(
             slug,
-            updated_estimate
+            updated_estimate,
+            matches,
+            last_updated
         ) %>%
         dplyr::rename(
             rit_estimate = updated_estimate
