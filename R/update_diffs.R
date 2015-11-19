@@ -48,11 +48,12 @@ update_diffs <- function(
     }
 
     if (verbose) print('Done.')
-    names(item_diffs) <- c('slug', 'rit_estimate')
+    names(item_diffs)[1:2] <- c('slug', 'rit_estimate')
 
     items <- item_diffs$slug
     item_diffs$rit_estimate <- (item_diffs$rit_estimate - 200) / 10
     item_diffs$updated_estimate <- 0
+    item_diffs$last_updated <- as.POSIXct(item_diffs$last_updated)
 
     if (verbose) print(paste('Updating', length(items), 'item difficulties...'))
     for (item in items) {
@@ -97,6 +98,9 @@ update_diffs <- function(
 
             item_diff <- item_diff * 10 + 200
             item_diffs$updated_estimate[match(item, item_diffs$slug)] <- item_diff
+            item_diffs$matches[match(item, item_diffs$slug)] <- item_diffs$matches[match(item, item_diffs$slug)] + nrow(item_history)
+            item_diffs$last_updated[match(item, item_diffs$slug)] <- format(Sys.time(), '%Y-%m-%d %H:%M:%S')
+
         }
         if(verbose) print('Done.')
     }
@@ -134,7 +138,9 @@ update_diffs <- function(
     updated_diffs <- item_diffs %>%
         dplyr::select(
             slug,
-            updated_estimate
+            updated_estimate,
+            matches,
+            last_updated
         ) %>%
         dplyr::rename(
             rit_estimate = updated_estimate

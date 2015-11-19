@@ -104,8 +104,11 @@ update_proficiencies <- function(
 
     est_profs <- data.frame(
         studentid = names(stu_activity),
-        estimated_proficiency = estimated_profs
+        estimated_proficiency = estimated_profs,
+        last_updated = ifelse(is.na(estimated_profs), NA, format(Sys.time(), '%Y-%m-%d %H:%M:%S'))
     )
+
+    # est_profs$last_updated <- as.POSIXct(est_profs$last_updated)
 
     return(est_profs)
 
