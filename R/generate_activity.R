@@ -89,8 +89,8 @@ generate_activity <- function(
                  estimate_type = inhouse'
             )
         } else {
-            inhouse <- read.csv(inhouse_est, stringsAsFactors = FALSE)
-            names(inhouse) <- c('slug', 'rit_estimate')
+            inhouse <- read.csv(inhouse_path, stringsAsFactors = FALSE)
+            names(inhouse)[1:2] <- c('slug', 'rit_estimate')
         }
 
         states_wide <- dplyr::left_join(

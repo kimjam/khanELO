@@ -57,7 +57,6 @@ update_proficiencies <- function(
     )
 
     estimated_profs <- vector(length = length(stu_activity))
-    last_updated <- vector(length = length(stu_activity))
     for (i in 1:length(stu_activity)) {
         exers <- stu_activity[[i]] %>%
             dplyr::group_by(
@@ -95,7 +94,6 @@ update_proficiencies <- function(
                     )
                 }
                 estimated_profs[i] <- rit * 10 + 200
-                last_updated[i] <- max(exers$date, na.rm = TRUE)
             } else {
                 estimated_profs[i] <- NA
             }
@@ -107,8 +105,10 @@ update_proficiencies <- function(
     est_profs <- data.frame(
         studentid = names(stu_activity),
         estimated_proficiency = estimated_profs,
-        last_updated = last_updated
+        last_updated = ifelse(is.na(estimated_profs), NA, format(Sys.time(), '%Y-%m-%d %H:%M:%S'))
     )
+
+    # est_profs$last_updated <- as.POSIXct(est_profs$last_updated)
 
     return(est_profs)
 
